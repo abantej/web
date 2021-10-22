@@ -1,0 +1,166 @@
+openapi: 3.0.0
+servers:
+  # Added by API  Mocking Plugin
+  - description: abantej Web API
+    url: https://virtserver.swaggerhub.com/abantej/web/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: abantej Web API
+  contact:
+    email: me@abantej.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /profiles:
+    get:
+      tags:
+        - developers
+      summary: List all profiles
+      operationId: searchProfiles
+      description: |
+        By passing in the appropriate options, you can list all available Profiles
+      parameters:
+        - in: query
+          name: limit
+          description: maximum number of records to return
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponseArray'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - developers
+      summary: Adds profiles
+      operationId: Add profiles
+      description: Adds an item to the system
+      responses:
+        '201':
+          description: Profile created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing Profile already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileRequestArray'
+        description: Inventory item to add
+    put:
+      tags:
+        - developers
+      summary: Update profile
+      operationId: updateProfile
+      description: |
+        By passing in the appropriate options, you can list all available Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileRequestArray'
+        description: Inventory item to add
+      responses:
+        '201':
+          description: Profile(s) updated
+        '400':
+          description: bad input parameter
+  /profiles/{id}:
+    get:
+      tags:
+        - developers
+      summary: Get profile
+      operationId: getProfile
+      description: |
+        By passing in the appropriate options, you can list all available Profiles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Id of Profile
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+        '400':
+          description: bad input parameter
+    delete:
+      tags:
+        - developers
+      summary: Delete profile
+      operationId: deleteProfile
+      description: |
+        By passing in the appropriate options, you can list all available Profiles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Id of Profile
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+      responses:
+        '201':
+          description: Profile deleted
+        '400':
+          description: bad input parameter
+components:
+  schemas:
+    ProfileRequestArray:
+      type: object
+      properties:
+        data:
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Profile'
+    ProfileResponseArray:
+      type: object
+      properties:
+        data:
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Profile'
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    Profile:
+      type: object
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
