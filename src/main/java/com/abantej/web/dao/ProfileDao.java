@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class ProfileDao {
 
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public ProfileDao(DataSource dataSource) {

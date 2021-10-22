@@ -1,5 +1,6 @@
 package com.abantej.web.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -17,5 +18,10 @@ public class AppConfig {
                 .addScript("classpath:db/schema.sql")
                 .addScript("classpath:db/data.sql")
                 .build();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

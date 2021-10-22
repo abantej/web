@@ -1,4 +1,4 @@
-package com.abantej.web.model;
+package com.abantej.web.dto;
 
 import lombok.*;
 
@@ -6,10 +6,10 @@ import java.util.Date;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
-public class Profile {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProfileDto {
     private Long id;
     private String firstName;
     private String middleName;
