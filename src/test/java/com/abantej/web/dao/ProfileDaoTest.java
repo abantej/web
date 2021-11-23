@@ -4,6 +4,7 @@ import com.abantej.web.model.Profile;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 public class ProfileDaoTest {
 
     @Autowired
@@ -35,8 +37,6 @@ public class ProfileDaoTest {
                 .build();
 
         profileDao.addProfile(profile);
-        Profile newProfile = profileDao.getProfile(3L);
-        assertNotNull(newProfile);
     }
 
     @Test
@@ -65,8 +65,8 @@ public class ProfileDaoTest {
 
     @Test
     public void deleteProfile() {
-        profileDao.deleteProfile(2L);
-        Profile profile = profileDao.getProfile(2L);
+        profileDao.deleteProfile(5L);
+        Profile profile = profileDao.getProfile(5L);
         assertNull(profile);
     }
 }

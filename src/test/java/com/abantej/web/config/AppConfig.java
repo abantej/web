@@ -12,6 +12,15 @@ import javax.sql.DataSource;
 public class AppConfig {
 
     @Bean
+    public DataSource standaloneDataSource() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("classpath:db/schema.sql")
+                .addScript("classpath:db/data.sql")
+                .build();
+    }
+
+    @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }

@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
+@Transactional
 public class ProfileDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -21,9 +23,7 @@ public class ProfileDao {
     }
 
     public List<Profile> getAllProfiles() {
-        return jdbcTemplate.query("select * from profile",
-                new ProfileMapper()
-        );
+        return jdbcTemplate.query("select * from profile", new ProfileMapper());
     }
 
     public void addProfile(Profile profile) {

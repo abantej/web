@@ -1,3 +1,8 @@
+--drop table education;
+--drop table work;
+--drop table address;
+--drop table profile;
+
 create table profile(
 	id serial,
 	first_name varchar(50) not null,
