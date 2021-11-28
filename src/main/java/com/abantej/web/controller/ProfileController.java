@@ -25,14 +25,14 @@ public class ProfileController {
     }
 
     @GetMapping("/profiles")
-    public ResponseEntity<Object> getAllProfiles() {
+    public ResponseEntity<List<ProfileDto>> getAllProfiles() {
         List<ProfileDto> allProfiles = profileService.getAllProfiles();
         return ResponseEntity.ok()
                 .body(allProfiles);
     }
 
     @PostMapping("/profiles")
-    public ResponseEntity<Object> addProfile(@RequestBody ProfileForm profileForm) {
+    public ResponseEntity<String> addProfile(@RequestBody ProfileForm profileForm) {
         ProfileDto profileDto = modelMapper.map(profileForm, ProfileDto.class);
         profileService.addProfile(profileDto);
         return ResponseEntity.ok()
@@ -40,7 +40,7 @@ public class ProfileController {
     }
 
     @PutMapping("/profiles/{id}")
-    public ResponseEntity<Object> updateProfile(@PathVariable Long id, @RequestBody ProfileForm profileForm) {
+    public ResponseEntity<String> updateProfile(@PathVariable Long id, @RequestBody ProfileForm profileForm) {
         ProfileDto profileDto = modelMapper.map(profileForm, ProfileDto.class);
         profileDto.setId(id);
         profileService.updateProfile(profileDto);
@@ -49,7 +49,7 @@ public class ProfileController {
     }
 
     @DeleteMapping("/profiles/{id}")
-    public ResponseEntity<Object> deleteProfile(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProfile(@PathVariable Long id) {
         profileService.deleteProfile(id);
         return ResponseEntity.ok()
                 .body("Profile deleted successfully.");
